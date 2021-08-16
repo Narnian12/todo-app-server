@@ -20,7 +20,6 @@ function addWriteTodo(todo) {
 
 function deleteTodoHelper(id) {
   todoList.list = todoList.list.filter(todo => todo.id !== id);
-  console.log(todoList);
   writeTodo();
 }
 
