@@ -3,6 +3,14 @@ const typeDefs = require('./schema');
 const fs = require('fs');
 
 var todoList = [];
+if (!fs.existsSync('./src/data.json')) {
+    fs.writeFile('./src/data.json', "{\"list\":[]}", err => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+}
 fs.readFile('./src/data.json', 'utf8', (err, data) => {
   if (err) {
     console.error(err);
