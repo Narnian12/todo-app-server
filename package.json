@@ -9,6 +9,6 @@
     "ts-node": "^10.2.1"
   },
   "scripts": {
-    "start": "node ./src/server.js"
+    "start": "node ./heroku/server.js"
   }
 }
