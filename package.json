@@ -7,7 +7,7 @@
     "graphql": "^15.5.1"
   },
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node ./src/index.ts"
   },
   "devDependencies": {
     "prisma": "^2.29.1",
