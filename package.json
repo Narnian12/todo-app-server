@@ -10,7 +10,7 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "ts-node ./src/server.ts"
+    "postinstall": "tsc",
+    "start": "node ./src/server.js"
   }
 }
