@@ -13,8 +13,7 @@ const typeDefs = gql`
   input TodoInput {
     id: String!,
     name: String!,
-    info: String,
-    updating: Boolean!
+    info: String
   }
 
   type Query {
@@ -23,6 +22,7 @@ const typeDefs = gql`
 
   type Mutation {
     addTodo(todo: TodoInput): Todo
+    setUpdating(id: String, updating: Boolean): Todo
     updateTodo(todo: TodoInput): Todo
     deleteTodo(id: String): Todo
   }
@@ -49,8 +49,7 @@ const resolvers = {
 interface TodoInput {
   id: string,
   name: string,
-  info: string,
-  updating: boolean
+  info: string
 }
 
 export const schema = makeExecutableSchema({
