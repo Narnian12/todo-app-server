@@ -21,6 +21,7 @@ const typeDefs = gql`
 
   type Mutation {
     addTodo(todo: TodoInput): Todo
+    updateTodo(todo: TodoInput): Todo
     deleteTodo(id: String): Todo
   }
 `;
@@ -32,6 +33,9 @@ const resolvers = {
   Mutation: {
     addTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
       return context.prisma.todo.create({ data: { id: args.todo.id, name: args.todo.name, info: args.todo.info }});
+    },
+    updateTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
+      return context.prisma.todo.update({ where: { id: args.todo.id }, data: { id: args.todo.id, name: args.todo.name, info: args.todo.info }});
     },
     deleteTodo: (_: any, args: { id: string }) => context.prisma.todo.delete({ where: { id: args.id }})
   }
