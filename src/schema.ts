@@ -7,7 +7,7 @@ const typeDefs = gql`
     id: String!,
     name: String!,
     info: String,
-    updating: Boolean!
+    editing: Boolean!
   }
 
   input TodoInput {
@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   type Mutation {
     addTodo(todo: TodoInput): Todo
-    setUpdating(id: String, updating: Boolean): Todo
+    setEditing(id: String, editing: Boolean): Todo
     updateTodo(todo: TodoInput): Todo
     deleteTodo(id: String): Todo
   }
@@ -34,13 +34,13 @@ const resolvers = {
   },
   Mutation: {
     addTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
-      return context.prisma.todo.create({ data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, updating: false }});
+      return context.prisma.todo.create({ data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, editing: false }});
     },
-    setUpdating: (_: any, args: { id: string, updating: boolean }, context: Context) => {
-      return context.prisma.todo.update({ where: { id: args.id }, data: { updating: args.updating }});
+    setEditing: (_: any, args: { id: string, editing: boolean }, context: Context) => {
+      return context.prisma.todo.update({ where: { id: args.id }, data: { editing: args.editing }});
     },
     updateTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
-      return context.prisma.todo.update({ where: { id: args.todo.id }, data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, updating: false }});
+      return context.prisma.todo.update({ where: { id: args.todo.id }, data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, editing: false }});
     },
     deleteTodo: (_: any, args: { id: string }) => context.prisma.todo.delete({ where: { id: args.id }})
   }

@@ -11,5 +11,5 @@ model Todo {
   id    String  @id 
   name  String  @unique
   info  String
-  updating Boolean
+  editing Boolean
 }
