@@ -6,13 +6,15 @@ const typeDefs = gql`
   type Todo {
     id: String!,
     name: String!,
-    info: String
+    info: String,
+    updating: Boolean!
   }
 
   input TodoInput {
     id: String!,
     name: String!,
-    info: String
+    info: String,
+    updating: Boolean!
   }
 
   type Query {
@@ -32,10 +34,13 @@ const resolvers = {
   },
   Mutation: {
     addTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
-      return context.prisma.todo.create({ data: { id: args.todo.id, name: args.todo.name, info: args.todo.info }});
+      return context.prisma.todo.create({ data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, updating: false }});
+    },
+    setUpdating: (_: any, args: { id: string, updating: boolean }, context: Context) => {
+      return context.prisma.todo.update({ where: { id: args.id }, data: { updating: args.updating }});
     },
     updateTodo: (_: any, args: { todo: TodoInput }, context: Context) => {
-      return context.prisma.todo.update({ where: { id: args.todo.id }, data: { id: args.todo.id, name: args.todo.name, info: args.todo.info }});
+      return context.prisma.todo.update({ where: { id: args.todo.id }, data: { id: args.todo.id, name: args.todo.name, info: args.todo.info, updating: false }});
     },
     deleteTodo: (_: any, args: { id: string }) => context.prisma.todo.delete({ where: { id: args.id }})
   }
@@ -44,7 +49,8 @@ const resolvers = {
 interface TodoInput {
   id: string,
   name: string,
-  info: string
+  info: string,
+  updating: boolean
 }
 
 export const schema = makeExecutableSchema({
