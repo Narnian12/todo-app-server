@@ -15,7 +15,6 @@
       "node": "16.6.0"
   },
   "scripts": {
-    "start": "node ./src/server.js",
-    "postinstall": "tsc ./src/context.ts ./src/schema.ts ./src/server.ts"
+    "start": "node ./src/server.js"
   }
 }
