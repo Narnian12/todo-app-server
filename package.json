@@ -16,6 +16,6 @@
   },
   "scripts": {
     "start": "node ./src/server.js",
-    "postinstall": "tsc"
+    "postinstall": "tsc ./src/context.ts ./src/schema.ts ./src/server.ts"
   }
 }

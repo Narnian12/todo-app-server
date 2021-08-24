@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import { schema } from './schema';
-import express from 'express';
-import http from 'http';
+const express = require('express');
+const http = require('http');
 import { GraphQLSchema } from 'graphql';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core/dist/plugin/drainHttpServer';
 
