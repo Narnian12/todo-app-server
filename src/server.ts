@@ -1,25 +1,9 @@
-import { ApolloServer } from 'apollo-server-express';
+  
+import { ApolloServer } from 'apollo-server';
 import { schema } from './schema';
-const express = require('express');
-import * as http from 'http';
-import { GraphQLSchema } from 'graphql';
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core/dist/plugin/drainHttpServer';
+import { context } from './context';
 
-async function startApolloServer(schema: GraphQLSchema) {
-    const app = express();
-    const httpServer = http.createServer(app);
-
-    const server = new ApolloServer({
-        schema,
-        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
-    });
-
-    await server.start();
-    server.applyMiddleware({
-        app,
-        path: '/'
-    });
-    await new Promise(resolve => httpServer.listen({ port: process.env.PORT || 4000 }, resolve));
-}
-
-startApolloServer(schema);
+const server = new ApolloServer({ schema, context: context });
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});

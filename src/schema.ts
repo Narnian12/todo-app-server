@@ -26,6 +26,10 @@ const typeDefs = gql`
     updateTodo(todo: TodoInput): Todo
     deleteTodo(id: String): Todo
   }
+
+  type Subscription {
+    getTodoList: [Todo]
+  }
 `;
 
 const resolvers = {
